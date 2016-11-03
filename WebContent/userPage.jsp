@@ -407,7 +407,7 @@
                     </div></li>
                 </ul>
                 </div>
-                <h2>"emyoon"님이 새로쓴글</h2>
+                <h2>"emyoon1"님이 새로쓴글</h2>
                 <ul id="newCom">
                     <li><i class="fa fa-quote-left"></i>
                         <a href="#">
