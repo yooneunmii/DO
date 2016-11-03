@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<title>image_upload</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+		<link rel="stylesheet" href="css/noto.sans.korea.css" />
+		<style>
+		
+			#wrap {
+				width:600px;
+				margin:auto;
+				padding:20px;
+				font:200 16px bon,sans-serif;
+				box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+			}
+			
+			#wrap h1{
+				font-size:40px;
+				font-weight:500;
+			}
+			
+			#uploadImgBox {
+				width:600px;
+				position: relative;
+			}
+			
+			#uploadImgBox ul {
+				display: inline-block;
+			}
+			
+			#uploadImgBox li {
+				display: inline-block;
+				width:100px;
+				height:100px;
+				border:1px solid #424242;
+				vertical-align:middle; 
+				position: relative;
+				margin:0 5px;
+				
+			}
+			
+			#uploadImgBox li img {
+				width:100px;
+				height:100px;
+			}
+			
+			#uploadImgBox li .btn_delete {
+				width:20px;
+				height:20px;
+				background:transparent;
+				border-radius:20px;
+				color:#2196F3;
+				position: absolute;
+				right:0;
+				top:0;
+				border:none;
+				font-size:20px;
+				line-height:20px;	
+				text-align: center;
+				padding: 0;
+				cursor: pointer;
+			}
+			
+			
+			#uploadImgBox label {
+				width:100px;
+				height:100px;
+				display: inline-block;
+				font-size:80px;
+				position: relative;
+				text-align: center;
+				border:1px solid #2196F3;
+				color:#2196F3;
+				line-height: 100px;
+				vertical-align:middle; 
+			}
+			
+			
+			#uploadImgBox input[type=file] {
+				width:40px;
+				height:40px;
+				opacity: 0;
+				cursor: pointer;
+				position: absolute;
+				left:0;
+				top:0;
+			}
+			
+			.loader {
+				width:100%;
+				height:100%;
+				position: absolute;
+				background:rgba(0,0,0,.7);
+				background-image:url(img/ajax-loader.gif);
+				background-repeat:no-repeat;
+				background-position:center;
+				left:0;
+				top:0;
+				display: none;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<h1>업로드될 이미지</h1>
+			<div id="uploadImgBox">
+				<form action="upload.jsp" method="post" enctype="multipart/form-data">
+					<fieldset>
+						<legend class="screen_out">업로드폼</legend>
+					<ul>
+						
+					</ul>
+					<label id="uploadLbl"><i class="fa fa-plus"></i><input type="file" name="upload1" /></label>
+				</fieldset>
+				<button>보내기</button>
+				</form>
+				<div class="loader"></div>
+			</div><!-- //uploadImgBox -->
+		</div><!-- //wrap -->
+		<script src="js/jquery.js"></script>
+		<script>
+				
+				//업로드될 파일이름의 index
+				var idx = 1;
+				
+				//업로드용 라벨(+)
+				var $uploadLbl = $("#uploadLbl");
+				
+				//파일을 읽어들이는 리더(HTML5 API)
+				var reader = new FileReader();
+				
+				//업로드될 이미지들의 list
+				var $ul = $("#uploadImgBox ul");
+				
+				
+				//이미지를 읽어들이는 동안 보여줄 로더
+				var $loader = $(".loader");
+				
+				$ul.on("click",".btn_delete",function() {
+					
+					//btn_delete를 누르면 그 부모(li)를 지운다.
+					$(this).parent().remove();
+					
+				});
+				
+				//파일을 읽어들이는 리더(HTML5 API)
+				var reader = new FileReader();
+				
+				
+				//(+)를 눌러서 그 안의 input type=file의 값이 변경되면
+				$uploadLbl.on("change","input",function() {
+					
+					//input type=file안의 실제 파일을 받아온다.(HTML5 API)
+					var file = this.files[0];
+					
+					//그 input요소
+					var $this = $(this);
+					
+					
+					//선택한 그 파일이 이미지인지 확인한다.
+					//(zip파일등 다른 파일이면 선택 불가)
+					if(!file.type.match('image.*')) {
+						alert("이미지를 선택해주세요~");
+						
+						$this.val("");
+						
+						return;
+					}
+					
+					//우선 로더를 보여준다.
+					$loader.show();
+					
+					//리더를 이용해 읽기를 시도한다.
+					reader.readAsDataURL(file);
+					
+					
+					//다 읽었으면 호출되는 콜백함수
+					reader.onload = function() {
+						//읽은 그 결과(이게 실제 이미지)
+						var result = reader.result;
+						
+						//ul에 새로 붙일 li를 만든다.
+						var $li =  $("<li>");
+						
+						//유저에게 보여질 img요소
+						var $img = $("<img>").attr("src",result);
+						
+						//삭제 버튼
+						var $button = $("<button type='button' title='삭제' class='btn_delete'><i class='fa fa-close'></i></button>");
+						
+						//li에 img,input,button을 붙임
+						$li.append($img,$this,$button);
+						
+						//ul에 li를 붙임					
+						$ul.append($li);
+						
+						//기존의 input요소는 li요소에 붙였기 때문에 또 새로운
+						//input요소를 만들어서 label에 붙여야 한다.
+						$("<input type='file'>").attr("name","upload"+ ++idx)
+						                        .appendTo($uploadLbl);
+						                        
+						
+						//로더를 숨긴다.                        
+                        $loader.fadeOut(100);
+						
+					};
+					
+				});
+			
+		</script>
+	</body>
+</html>

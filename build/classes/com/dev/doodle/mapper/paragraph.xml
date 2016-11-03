@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="paragraph">
+
+	<insert id="ranInsert" parameterType="Paragraph">
+	INSERT INTO paragraph(no,user_no,board_no,content,regdate,img,result,last_line)
+	VALUES(paragraph_seq.nextval,#{userNo},#{boardNo},#{content},
+	systimestamp,#{img},'F','F')
+	
+	</insert>
+	<select id="ranSelect" resultType="Paragraph">
+	SELECT no,boardNo,userNo,regdate,content,img,result,lastLine,title,nickname,profile
+	FROM(SELECT p.no no,p.board_no boardNo,p.user_no userNo ,p.regdate regdate,p.content content,p.img img,p.result result,p.last_line lastLine,b.title title,u.nickname nickname, u.profile profile
+	 	 FROM paragraph p,users u,board b
+	 	 WHERE last_line='T' AND  u.no=p.user_no AND p.board_no= b.no
+	 	 ORDER BY dbms_random.value)
+	WHERE rownum=1
+	</select>
+	
+	<!-- 소희누나 -->
+	
+  <select id="selectAll" resultType="Paragraph">
+      SELECT profile, nickname, content, title, TO_CHAR(regdate, 'YYYY-MM-DD') dateRegdate
+	  FROM(SELECT u.profile profile, 
+      		      u.nickname nickname, 
+        		  p.content content, 
+            	  b.title title, 
+            	  b.regdate regdate
+      	   FROM users u, paragraph p, board b
+     	   WHERE p.user_no = u.no AND p.board_no = b.no
+  	       ORDER BY 5 DESC)
+   </select>
+   <select id="selectRealTime" parameterType="Paragraph" resultType="Paragraph">
+   SELECT content, kindNo, r
+   FROM(SELECT count, content, kindNo, rownum r
+       FROM(SELECT count(*) count, p.content content, f.kind_no kindNo
+            FROM paragraph p, favor f
+             WHERE p.regdate BETWEEN SYSDATE-1 AND SYSDATE AND f.category_no=1 AND f.result='L' AND p.result='T'AND p.no=f.kind_no
+             group by p.content, f.kind_no
+             order by 1 desc))
+   WHERE r BETWEEN #{start} AND #{end}
+   </select>
+   <!-- 홍수형 -->
+   
+  	<insert id="insertFirstLine" parameterType="Paragraph">
+		INSERT INTO paragraph(no,user_no,board_no,content,regdate,img,result,last_line)
+ 		VALUES(paragraph_seq.nextval,#{userNo},#{boardNo},#{content}, systimestamp,null,'T','T')
+	</insert>
+	
+	<select id="selectWrittenCount" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM paragraph
+		WHERE user_no = #{userNo}
+	</select>
+
+<!-- 은미 -->
+
+
+<select id="selectAllT" parameterType="Paragraph" resultType="Paragraph">
+
+select p.no,p.user_no userNo,p.board_no boardNo,p.content,p.img,p.result,p.last_line lastLine,u.nickname,u.profile,p.regdate
+from paragraph p,users u
+where p.board_no=#{boardNo}  and p.result=#{result} and p.user_no=u.no
+ORDER by 1
+</select>
+
+<select id="selectFTime" parameterType="Paragraph" resultType="Paragraph">
+select p.no,p.user_no userNo,p.board_no boardNo,p.content,p.img,p.result,p.last_line lastLine,u.nickname,u.profile,p.regdate
+from paragraph p,users u
+where p.board_no=#{boardNo}  and p.result=#{result} and p .user_no=u.no
+ORDER by 1 DESC
+</select>
+
+<insert id="insert" parameterType="Paragraph">
+
+insert into paragraph(no,user_no,board_no,content,result,last_line,regdate)
+values(paragraph_seq.nextval,#{userNo},#{boardNo},#{content},#{result},#{lastLine},systimestamp)
+
+</insert>
+
+<select id="selectHot" parameterType="Paragraph" resultType="Paragraph">
+select p.no no,p.content content,p.user_no userNo,f.c up,u.profile,u.nickname
+from users u,paragraph p,(select no,c
+from(select no,c, rownum r
+from (select kind_no no,count(*) c
+from favor
+where category_no = #{categoryNo} AND result=#{result}
+group by kind_no
+ORDER BY 2 DESC
+))x
+where r BETWEEN 1 AND 10) f
+where p.no = f.no
+and p.board_no = #{boardNo}
+and u.no=p.user_no
+</select>
+</mapper>

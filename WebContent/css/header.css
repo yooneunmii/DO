@@ -1,0 +1,296 @@
+
+html {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	overflow-y: scroll;
+	font-family: 'bon', sans-serif;
+}
+
+/*헤더 시작*/
+#header {
+	width: 100%;
+	height: 60px;
+	position: fixed;
+	left: 0;
+	top: 0;
+	border-bottom: 1px solid #eee;
+	z-index: 99;
+	background: #fff;
+}
+
+#menuBar {
+	width: 1000px;
+	height: 60px;
+	margin: auto;
+	font: 500 20px 'bon', sans-serif;
+	position: relative;
+}
+
+#logo {
+	display:block;
+	width: 190px;
+	height: 60px;
+	float: left;
+}
+
+#logo img {
+	width: 190px;
+	height: 60px;
+}
+
+#menu1 {
+	width: 610px;
+	height: 60px;
+	position:absolute;
+	top:0;
+	left:190px;
+}
+
+#menu1 a {
+	text-decoration: none;
+	color: #333;
+	height: 60px;
+	line-height:60px;
+	padding-right:10px;
+}
+
+#searchForm, #shuffle {
+	float: right;	
+}
+
+#searchForm {
+	width:210px;
+	height: 60px;
+	line-height:60px;
+	padding: 0;
+}
+
+#searchForm input {
+	width: 180px;
+	font: 300 15px 'bon', sans-serif;
+	border: 1px solid #eee;
+}
+
+.btn {
+	font: 500 20px 'bon', sans-serif;
+	color: #333;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	background: none;
+}
+
+#menu2 {
+	position: absolute;
+	top:0;
+	right:0;
+}
+
+#loginBefore, #loginAfter {
+	float: right;
+	width:190px;
+	height: 60px;
+	line-height: 60px;
+}
+
+#loginBefore a {
+	text-decoration: none;
+	color: #333;
+	margin: 0 10px;
+}
+
+#loginBox {
+	width: 250px;
+	height: 160px;
+	position: absolute;
+	right: -78px;
+	top: 0;
+	margin: 60px 60px 0 0;
+	background: #FFF;
+	border: 1px solid #eee;
+	z-index: 10;
+	display: none;
+}
+
+#loginBox::before {
+	content: "";
+	width: 0;
+	height: 0;
+	display: block;
+	border-left: 15px solid transparent;
+	border-right: 15px solid transparent;
+	border-bottom: 15px solid #eee;
+	position: absolute;
+	top: -16px;
+	left: 55px;
+}
+
+#loginBox::after {
+	content: "";
+	width: 0;
+	height: 0;
+	display: block;
+	border-left: 15px solid transparent;
+	border-right: 15px solid transparent;
+	border-bottom: 15px solid #fff;
+	position: absolute;
+	top: -15px;
+	left: 55px;
+}
+
+#loginBox #id, #pwd {
+	width: 220px;
+	height: 30px;
+	margin: 15px 15px 0 15px;
+	font-family: 'bon', sans-serif;
+	border: 1px solid #eee;
+}
+
+#loginBox a {
+	text-decoration: none;
+	color: #333;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	margin: 15px;
+	font: 500 15px 'bon', sans-serif;
+}
+
+#loginBox button {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	margin: 10px 20px;
+	padding: 3px 8px;
+	border: 1px solid #eee;
+}
+
+#loginAfter a {
+	text-decoration: none;
+	display:block;
+	width:155px;
+	height: 60px;
+}
+
+#loginAfter img {
+	width: 50px;
+	height: 50px;
+	margin:5px;
+	border: none;
+	border-radius: 25px;
+	float: left;
+}
+
+#loginAfter span {
+	color: #333;
+	width:95px;
+	margin:18px 0;
+	/* vertical-align은 자식에게 줘야 하고
+	부모를 기준으로 자식이 움직이게 됨
+	근데 왜 top을 줬는데 가운데로 오는지는 모름!
+	가끔 이럴 때가 있다고 함 - P */
+	float: left;
+	/*제목이 길때 (...이 나타남)*/
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-height: 1.2em;
+}
+
+#loginAfter button {
+	width:35px;
+	height:60px;
+	position: absolute;
+	right: 0;
+	top:0;
+}
+
+#alarmBox {
+	width: 300px;
+	min-height: 300px;
+	position: absolute;
+	right: -107px;
+	top: 60px;
+	z-index: 10;
+	background: #fff;
+	border: 1px solid #eee;
+	font: 400 15px 'bon', sans-serif;
+	display: none;
+}
+
+#alarmBox::before {
+	content: "";
+	width: 0;
+	height: 0;
+	display: block;
+	border-left: 15px solid transparent;
+	border-right: 15px solid transparent;
+	border-bottom: 15px solid #eee;
+	position: absolute;
+	top: -16px;
+	left: 161px;
+}
+
+#alarmBox::after {
+	content: "";
+	width: 0;
+	height: 0;
+	display: block;
+	border-left: 15px solid transparent;
+	border-right: 15px solid transparent;
+	border-bottom: 15px solid #fff;
+	position: absolute;
+	top: -15px;
+	left: 161px;
+}
+
+#alarmBox span {
+	width: 280px;
+	height:43px;
+	line-height:43px;
+	padding: 0 10px;
+	margin:0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-bottom: 1px solid #eee;
+}
+
+#alarmBox button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 70px;
+	height:43px;
+	font: 400 15px 'bon', sans-serif;
+}
+
+#alarmBox p {
+	height:300px;
+	line-height: 300px;
+	text-align: center;
+}
+
+#alarmBox div {
+	margin: auto;
+	position: absolute;
+	bottom: 0;
+	border-top: 1px solid #eee;
+}
+
+#alarmBox a {
+	width: 100px;
+	height:43px;
+	line-height:43px;
+	text-align: center;
+	text-decoration: none;
+	color: #333;
+	display: block;
+	float: left;
+}
+/*헤더 끝*/

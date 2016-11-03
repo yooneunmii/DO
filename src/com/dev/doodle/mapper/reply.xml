@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reply">
+
+	<!-- 홍수형 -->
+	<select id="selectSearch" parameterType="String" resultType="Reply">
+		SELECT r.no, r.content, r.regdate, r.img, r.user_no userNo, r.paragraph_no paragraphNo, u.nickname, u.profile
+		FROM reply r, users u
+		WHERE content LIKE '%' ||  #{keyword} || '%'
+		AND r.user_no = u.no
+	</select>
+	<!-- 은미 -->
+<insert id="insert" parameterType="Reply">
+insert into reply(no,content,regdate,img,user_no,paragraph_no)
+values (reply_seq.nextval,#{content},systimestamp,#{img},#{userNo},#{paragraphNo})
+</insert>
+
+<select id="select" parameterType="PagingVO" resultType="Reply">
+SELECT r.no,r.content,r.regdate,r.img,r.user_No,r.paragraph_No,r.r,u.nickname,u.profile
+FROM users u,(SELECT  no,content,regdate,img,user_No,paragraph_No,rownum r
+		FROM(SELECT  no,content,regdate,img,user_No,paragraph_No,rownum
+				FROM reply
+				where paragraph_No =#{no}
+				ORDER BY 1 DESC)) r
+WHERE u.no=r.user_no and r.r BETWEEN #{start} AND #{end}
+</select>
+
+<select id="totle" parameterType="int" resultType="int">
+select count(*)
+from reply
+where paragraph_no=#{no}
+</select>
+</mapper>

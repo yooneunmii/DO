@@ -1,0 +1,121 @@
+@charset "UTF-8";
+
+
+html {
+	overflow-y: scroll;
+}
+body {
+	font-family: 'bon', serif;
+	color:#515151;
+}
+
+
+#wrap {
+	width: 1000px;
+	margin: 30px auto 10px auto;
+	font: 200 16px 'bon', sans-serif;
+	box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+		
+#header{
+			color:#fff;
+			height:100px;
+			font-size: 60px;
+			background: #80E8AE;
+		}
+		#content{
+			width:800px;
+			padding:30px 100px;
+			min-height: 400px;
+			border-bottom: 1px solid #DFE7FF;
+			border-top: 1px solid #DFE7FF;
+			background: #F6F6F6;
+		}
+
+		#header h1 > a {
+			color: #4DD0E1;
+			text-decoration: none;
+			font-weight: bold;
+			transition:color .2s ease,
+			           border .1s ease,
+			           text-shadow .3s ease .1s;
+		}
+
+		#header h1 > a:hover {
+			color: #607D8B;
+			border-bottom: 6px solid #607D8B;
+			text-shadow:0 0 5px #607D8B;
+		}
+		
+		
+		#content {
+			width: 900px;
+			min-height: 400px;
+			padding: 20px 100px;
+			position: relative;
+		}
+		
+		#footer {
+			width: 1100px;
+			height: 100px;
+			text-align: center;
+			line-height: 100px;
+			color: #fff;
+			background: #E0F7FA;
+			border-radius:0 0 20px 20px;
+		}
+		
+		#content h2 {
+			font-size: 32px;
+			color: #4DD0E1;
+			margin-bottom: 20px;
+			font-weight: bold;
+			text-align: center;
+		}
+		
+		#footer{
+					height:100px;
+					text-align: center;
+					line-height:100px;
+					background: #80E8AE;
+				}
+		
+		#btnBox {
+			padding: 10px 0;
+			text-align: right;
+		}
+		
+		
+			#header h1{
+					text-align: center;
+					font-size : 50px;
+					font-weight:600;
+					line-height:100px;
+				}
+				
+				#content h2{
+					font-size:30px;
+					font-weight:300;
+				}
+				
+		
+		.btn {
+					background: #c5ff9e;
+					padding: 8px 10px;
+					color: #424242;
+					text-decoration:none;
+					display: inline-block;
+					font: 500 15px bon,sans-serif;
+					cursor: pointer;
+				}
+				
+			.box_btn {
+					text-decoration: none;
+			}
+		
+		.btn:hover{
+			background: #00A178;
+			color:#fff;
+			box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		}

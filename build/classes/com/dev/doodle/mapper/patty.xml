@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="patty">
+
+<insert id="insertPatty" parameterType="Patty">
+INSERT INTO patty(NO,user_no,content,regdate,burger_no)
+VALUES(patty_seq.nextval,#{userNo},#{content},systimestamp,#{burgerNo})
+
+</insert>
+
+<select id="bestSelect" parameterType="int" resultType="Patty">
+SELECT no,user_no userNo,content,regdate,burger_no burgerNo
+FROM patty
+WHERE no=#{no}
+</select>
+
+<select id="selectList" resultType="Patty" parameterType="int">
+	SELECT no,userNo,content,regdate,burgerNo,profile,nickname,r
+	FROM(SELECT no,userNo,content,regdate,burgerNo,profile,nickname,rownum r
+		 FROM(SELECT p.no no,p.user_no userNo,content,regdate,burger_no burgerNo,profile,nickname
+	 		  FROM patty p,users u
+	 		  WHERE p.user_no=u.no
+	 		  ORDER BY 4 DESC))
+	where r BETWEEN 1 AND #{no}*5
+</select>
+
+<select id="selectOne" resultType="Patty" parameterType="int">
+SELECT p.no no,p.user_no userNo,content,p.regdate regdate
+      ,burger_no burgerNo,start_sentence startSentence,end_sentence endSentence
+	 		  FROM patty p,burgers b
+	 		  WHERE p.burger_no=b.no AND p.no=#{no}
+
+
+</select>
+
+</mapper>

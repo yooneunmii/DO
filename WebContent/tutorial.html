@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<title>tutorial</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/noto.sans.korea.css" />
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+		<style>
+		
+			html {
+				overflow-y:scroll;
+			}
+			
+			#body {
+				font-family: bon, sans-serif;
+			}
+
+			#tutorial {
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				left: 0;
+				top: 0;
+			}
+			
+			#layout {
+				z-index: 1;
+				position: relative;
+				margin:auto;
+				padding-top:70px;
+			}
+
+			#exampleText, #showText {
+				width: 978px;
+				padding: 5px 10px;
+				border: 1px dot #fff;
+				diplay:block;
+				margin:auto;
+				font: 300 20px/50px bon, sans-serif;
+				color:#fff;
+				text-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 
+							 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+			}
+			
+			#showText{
+				min-height: 70px;
+				opacity: 0;
+				transition: .6s ease;
+			}
+			
+			#exampleText div {
+           		transition: .6s ease;
+           		opacity: 0;
+         	}
+         	
+         	#exampleText div:nth-child(1) {transition-delay: 0;}
+         	#exampleText div:nth-child(2) {transition-delay: 1000ms;}
+         	#exampleText div:nth-child(3) {transition-delay: 2000ms;}
+         	#exampleText div:nth-child(4) {transition-delay: 3000ms;}
+         	#exampleText div:nth-child(5) {transition-delay: 4000ms;}
+         	#exampleText div:nth-child(6) {transition-delay: 5000ms;}
+         	#exampleText div:nth-child(7) {transition-delay: 6000ms;}
+         	#exampleText div:nth-child(8) {transition-delay: 7000ms;}
+         	#exampleText div:nth-child(9) {transition-delay: 8000ms;}
+         	
+         	#exampleText.animation div {
+           		opacity: 1;
+            }
+
+			#inputText {
+				z-index: 1;
+				width: 1000px;
+				margin: 20px auto;
+				display:none;
+			}
+
+			#inputText input, #writeBtn {
+
+				display: block;
+				float: left;
+				margin: auto;
+				height: 50px;
+				border: 1px solid #fff;
+				font: 300 20px/50px bon, sans-serif;
+				color:#fff;
+			}
+
+			#inputText input {
+				width: 874px;
+				padding: 5px 10px;
+				margin-right: 5px;
+				background-color:transparent;
+				
+			}
+			
+			::-webkit-input-placeholder { /* WebKit browsers */ color: #fff; }
+			:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ color: #fff; opacity: 1; }
+
+			#TBtn {
+				width: 85px;
+				height: 60px;
+				cursor: pointer;
+				display: inline-block;
+				box-sizing: content-box;
+				background: rgba(255,255,255,.1);
+			}
+
+			#inputText:focus {
+				background: rgba(255,255,255,.9);
+				color: #333;
+			}
+
+			#writeBtn:hover {
+				background: rgba(255,255,255,.9);
+				color: #333;
+			}
+			
+			#skip {
+				width: 100px;
+				height: 50px;
+				padding: 5px 10px;
+				position:absolute;
+				top:10px;
+				right:10px;
+				display: block;
+				text-align: center;
+				font: 300 20px/50px bon, sans-serif;
+				color:#fff;
+			}
+			
+			#skip:hover {
+				background: rgba(255,255,255,.9);
+				color: #333;
+			}
+			
+			#videoContainer{
+				width:100%;
+				height:100%;
+				position: absolute;
+				left:0;
+				top:0;
+				overflow:hidden;
+			}
+			
+			#videoContainer::after {
+				content: "";
+				width: 100%;
+				height: 100%;
+				display: block;
+				position: absolute;
+				left: 0;
+				top: 0;
+				background: rgba(0,0,0,.5);
+			}
+			
+			#videoContainer > video {
+				min-width: 100%;
+				min-height: 100%;
+			}
+			#writeText{
+			margin-top:-30px;
+			}
+
+		</style>
+	</head>
+	
+	<body>
+		
+		<div id="tutorial">
+			<div id="layout">
+				<a id="skip" href="index.jsp" title="넘어가기">Skip<i class="fa fa-angle-double-right"></i></a>
+
+				<div id="exampleText" class="exampleTextClass">
+					
+					<div>"그럼 현미경으로 찍은 눈 결정 모양도 봤어요?"</div>
+					<div>"그럼"</div>
+					<div>"나는 그게 참 이상했는데"</div>
+					<div>"뭐가?"</div>
+					<div>"뭐하러 그렇게 아름답나"</div>
+					<div>"....."</div>
+					<div><br/></div>
+					<div>"어차피 눈에 보이지도 않고</div>
+					<div>땅에 닿자마자 금방 사라질 텐데."</div>
+				</div><!-- //exampleText -->
+				
+				<div id="showText">
+				</div><!-- //showText -->
+				
+				<div id="inputText">
+					<form action="" method="post">
+						<fieldset>
+							<legend class="screen_out">튜토리얼 입력</legend>
+							<label for="writeText" class="screen_out">튜토리얼 작성폼</label>
+							<input  id="writeText" name="writeText" title="이어지는 글을 적어주세요." placeholder="당신의 이야기를 더해주세요!"/>
+							<button type="submit" id="writeBtn" title="작성하기">작성</button>		
+						</fieldset>
+					</form>
+				</div><!-- //inputText -->
+			</div><!-- //layout -->
+
+			<div id="videoContainer">
+				<video autoplay loop id="video">
+					<source src="video/Fountainpen Writing.mp4"></source>
+				</video>
+			</div><!-- //videoContainer -->
+			
+			<div id="audioContainer">
+				<audio src="audio/writeSound.ogg" autoplay="autoplay" loop="loop"></audio>
+			</div><!-- //audioContainer -->
+					
+		</div><!-- //tutorial -->
+		<script src="js/jquery.js"></script>
+		<script>
+			
+			$('#writeBtn').click(function(e) {
+				//	alert("test");
+				e.preventDefault();
+				var contents = $('#writeText').val();
+				
+				//alert(contents);
+				//$('#showText').text("");
+				$('#showText').css('opacity',0);
+				setTimeout(function() {
+					$('#showText').css('opacity',1).text("\""+contents+"\"");
+				},600);
+			});
+			
+			setInterval(function() {
+           		$("#exampleText").addClass("animation");
+       	    }, 1000);
+       	    
+       	    setInterval(function() {
+           		$('#inputText').fadeIn(2500);
+       	    }, 9000);
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="old">
+	<select id="selectCount" resultType="int">
+		SELECT COUNT(*)
+		FROM old
+	</select>
+
+	<select id="selectList" resultType="old">
+		SELECT no,name,img
+		FROM old
+	</select>
+	
+	<select id="selectRanList" resultType="old" >
+		SELECT no,name,img
+		FROM old
+		ORDER BY dbms_random.value
+	</select>
+	
+
+</mapper>

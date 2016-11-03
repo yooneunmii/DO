@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bookmark">
+
+<select id="selectBookmarkMain" parameterType="int" resultType="Bookmark">
+SELECT title, regdate, content, turn, no, r
+FROM(SELECT title, regdate, content, turn, no, rownum r
+	 FROM(SELECT b.title title, p.regdate regdate, p.content content, m.turn turn, m.no no
+		  FROM board b, paragraph p, bookmark m
+		  WHERE b.no = p.board_no AND b.no = m.board_no AND p.last_line='T' AND m.user_no=#{userNo}
+		  ORDER BY 4 DESC))
+WHERE r BETWEEN 1 AND 5
+</select>
+
+<select id="selectBookmark" parameterType="int" resultType="Bookmark">
+SELECT title, regdate, content, turn, no
+FROM(SELECT title, regdate, content, turn, no, rownum r
+	 FROM(SELECT b.title title, p.regdate regdate, p.content content, m.turn turn, m.no no
+		  FROM board b, paragraph p, bookmark m
+		  WHERE b.no = p.board_no AND b.no = m.board_no AND p.last_line='T' AND m.user_no=#{userNo}
+		  ORDER BY 4 DESC))
+</select>
+
+<select id="checkTurn" parameterType="Bookmark" resultType="int">
+SELECT count(turn)
+FROM BOOKMARK
+WHERE user_no=#{userNo} AND turn = #{turn}
+</select>
+
+<update id="updateTurnUp" parameterType="Bookmark">
+UPDATE BOOKMARK
+SET turn = turn + 1
+WHERE no=#{no} AND turn = #{turn}
+</update>
+
+<update id="updateTurnDown" parameterType="Bookmark">
+UPDATE BOOKMARK
+SET turn = turn - 1
+WHERE no=#{no} AND turn = #{turn}
+</update>
+	
+
+<!-- 홍수형 -->
+
+	<select id="selectCount" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM bookmark
+		WHERE board_no = #{boardNo} AND open = 'F'
+		GROUP BY board_no
+	</select>
+<!-- 은미 -->
+
+<insert id="insert" parameterType="Bookmark">
+insert into bookmark (no,user_no,board_no,recom_content,open,turn)
+values(bookmark_seq.nextval,#{userNo},#{boardNo},#{recomCotent},#{open},#{turn})
+</insert>
+<delete id="delete" parameterType="Bookmark">
+delete from bookmark where  user_no=#{userNo} and board_no=#{boardNo}
+</delete>
+
+<select id="check" parameterType="Bookmark" resultType="int">
+select count(*)
+from bookmark
+where user_no=#{userNo} and board_no=#{boardNo}
+</select>
+<select id="userBookmark" parameterType="int" resultType="int">
+select count(*)
+from bookmark
+where user_no=#{userNo}
+</select>
+</mapper>

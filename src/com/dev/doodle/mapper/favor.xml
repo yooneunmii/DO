@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="favor">
+
+	<insert id="insertAgo" parameterType="Favor">
+		INSERT INTO favor(no,user_no,kind_no,category_no,result)
+		VALUES(favor_seq.nextval,#{userNo},#{kindNo},#{categoryNo},#{result})
+	</insert>
+	<select id="selectUnlike" resultType="int" parameterType="int">
+		select count(*) u
+			  from favor
+			  where category_no=3  AND result='U' AND kind_no=#{no}
+			  group by kind_no
+	</select>
+	
+	<select id="selectLike" resultType="int" parameterType="int">
+		select count(*) u
+			  from favor
+			  where category_no =3  AND result='L' AND kind_no=#{no}
+			  group by kind_no
+	</select>
+	
+	<select id="selectoverlap" parameterType="Favor" resultType="int">
+		select no
+		from favor
+		WHERE user_no=#{userNo} AND kind_no=#{kindNo} AND category_no=3
+	</select>
+	<update id="updateFavor"  >
+		UPDATE favor
+		SET result=#{result}
+		WHERE no=#{no}
+	</update>
+	
+<!-- 소희누나  -->
+
+
+<select id="selectBest" parameterType="Favor" resultType="Favor">
+SELECT content
+FROM(SELECT content, rownum r
+	 FROM(SELECT p.content content
+		  FROM paragraph p, favor f
+		  WHERE f.category_no=1 AND f.result='L' AND p.result='T'AND p.no=f.kind_no
+		  group by p.content, f.kind_no
+		  order by 1 desc))
+WHERE r BETWEEN 1 AND 5
+</select>
+
+
+<!-- 은미 -->
+
+
+<select id="boardLike" parameterType="Favor" resultType="Favor">
+select f.user_no userNo
+from board b,favor f
+where f.category_no=#{categoryNo} and f.kind_no=#{kindNo} and b.no=f.kind_no and result=#{result}
+</select>
+<insert id="insert" parameterType="Favor" >
+insert into favor(category_no,user_no,kind_no,result,no)
+values(#{categoryNo},#{userNo},#{kindNo},#{result},favor_seq.nextval)
+</insert>
+<delete id="delete" parameterType="Favor" >
+delete from favor where  kind_no=#{kindNo} and category_no=#{categoryNo}
+And user_no=#{userNo}
+</delete>
+<select id="total" parameterType="Favor" resultType="int">
+select count(*)
+from favor
+where kind_no=#{kindNo} and category_no=#{categoryNo}
+</select>
+<select id="check" parameterType="Favor" resultType="int">
+select count(*)
+from favor
+where user_no=#{userNo} and kind_no=#{kindNo} and category_no=#{categoryNo}
+</select>
+
+
+
+
+	<select id="selectSearchUnlike" resultType="int" parameterType="int">
+		select count(*) u
+		from favor
+		where category_no =#{no} AND result='U'
+		group by kind_no
+	</select>
+	<select id="selectSearchLike" resultType="int" parameterType="int">
+		select count(*) u
+		from favor
+		where category_no =#{no} AND result='L'
+		group by kind_no
+	</select>
+</mapper>

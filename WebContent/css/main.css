@@ -1,0 +1,335 @@
+@charset "UTF-8";
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+/*font-family: 'Nanum Myeongjo', serif;*/
+@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+/*font-family: 'Nanum Pen Script', cursive;*/
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+/*font-family: 'Jeju Gothic', sans-serif;*/
+html {
+overflow-y: scroll;
+}
+/*헤더 시작*/
+#header {
+   width: 100%;
+   height: 60px;
+   position: fixed;
+   left: 0;
+   top: 0;
+   border-bottom: 1px solid #eee;
+   z-index: 99;
+   background: #fff;
+}
+
+#menuBar {
+   width: 1000px;
+   height: 60px;
+   margin: auto;
+   font: 500 20px 'bon', sans-serif;
+   position: relative;
+}
+
+#logo {
+   width: 200px;
+   height: 40px;
+   line-height: 40px;
+   padding: 10px;
+   text-align: center;
+   font-size: 36px;
+   font-weight: 700;
+   color: #333;
+   float: left;
+   text-decoration: none;
+}
+
+#leftMenu a, #rightMenu a {
+   text-decoration: none;
+   color: #333;
+}
+
+#leftMenu li {
+   float: left;
+   padding: 10px;
+   line-height: 40px;
+}
+
+#leftMenu li:first-child {
+   padding-left: 0;
+}
+
+#rightMenu a {
+   float: right;
+   padding: 10px;
+   line-height: 40px;
+}
+
+#searchForm {
+   float: right;
+   height: 30px;
+   margin: 15px 0 0 15px;
+}
+
+#searchForm input {
+   width: 150px;
+   font: 300 15px 'bon', sans-serif;
+   border: none;
+}
+
+.btn {
+   font: 500 20px 'bon', sans-serif;
+   color: #333;
+   border: none;
+   cursor: pointer;
+   padding: 0;
+   background: none;
+}
+
+#loginBefore {
+   float: right;
+   padding: 10px;
+   line-height: 40px;
+}
+
+#loginBefore a {
+   text-decoration: none;
+   color: #333;
+   margin-left: 10px;
+}
+
+#loginBox {
+   width: 250px;
+   height: 160px;
+   position: absolute;
+   right: 47px;
+   top: 0;
+   margin: 60px 60px 0 0;
+   background: #FFF;
+   border: 1px solid #eee;
+   z-index: 10;
+   display: none;
+}
+
+#loginBox::before {
+   content: "";
+   width: 0;
+   height: 0;
+   display: block;
+   border-left: 15px solid transparent;
+   border-right: 15px solid transparent;
+   border-bottom: 15px solid #eee;
+   position: absolute;
+   top: -16px;
+   left: 25px;
+}
+
+#loginBox::after {
+   content: "";
+   width: 0;
+   height: 0;
+   display: block;
+   border-left: 15px solid transparent;
+   border-right: 15px solid transparent;
+   border-bottom: 15px solid #fff;
+   position: absolute;
+   top: -15px;
+   left: 25px;
+}
+
+#loginBox #id, #pwd {
+   width: 220px;
+   height: 30px;
+   margin: 15px 15px 0 15px;
+   font-family: 'bon', sans-serif;
+   border: 1px solid #eee;
+}
+
+#loginBox a {
+   text-decoration: none;
+   color: #333;
+   position: absolute;
+   left: 0;
+   bottom: 0;
+   margin: 15px;
+   font: 500 15px 'bon', sans-serif;
+}
+
+#loginBox button {
+   position: absolute;
+   right: 0;
+   bottom: 0;
+   margin: 10px 20px;
+   padding: 3px 8px;
+   border: 1px solid #eee;
+}
+
+#loginAfter {
+   float: right;
+   padding: 10px;
+   line-height: 40px;
+   position: relative;
+   width: 200px;
+}
+
+#loginAfter img {
+   width: 50px;
+   height: 50px;
+   border: none;
+   border-radius: 25px;
+   position: absolute;
+   top: 5px;
+   left: 0;
+   display: inline-block;
+}
+
+#loginAfter span {
+   position: absolute;
+   top: 10px;
+   left: 55px;
+   color: #333;
+}
+
+#loginAfter button {
+   position: absolute;
+   top: 15px;
+   right: 0;
+   font-size: 20px;
+   width: 30px;
+   height: 30px;
+}
+
+#alarmBox {
+   width: 300px;
+   min-height: 300px;
+   position: absolute;
+   right: -230px;
+   top: 60px;
+   z-index: 10;
+   background: #fff;
+   border: 1px solid #eee;
+   font: 400 15px 'bon', sans-serif;
+   display: none;
+}
+
+#alarmBox::before {
+   content: "";
+   width: 0;
+   height: 0;
+   display: block;
+   border-left: 15px solid transparent;
+   border-right: 15px solid transparent;
+   border-bottom: 15px solid #eee;
+   position: absolute;
+   top: -16px;
+   left: 41px;
+}
+
+#alarmBox::after {
+   content: "";
+   width: 0;
+   height: 0;
+   display: block;
+   border-left: 15px solid transparent;
+   border-right: 15px solid transparent;
+   border-bottom: 15px solid #fff;
+   position: absolute;
+   top: -15px;
+   left: 41px;
+}
+
+#loginAfter #alarmBox span {
+   width: 280px;
+   padding: 10px;
+   position: absolute;
+   top: 0;
+   left: 0;
+   border-bottom: 1px solid #eee;
+}
+
+#loginAfter #alarmBox button {
+   position: absolute;
+   top: 0;
+   right: 0;
+   padding: 10px;
+   width: 70px;
+   font: 400 15px 'bon', sans-serif;
+}
+
+#loginAfter #alarmBox p {
+   line-height: 300px;
+   text-align: center;
+}
+
+#loginAfter #alarmBox div {
+   width: 300px;
+   margin: auto;
+   position: absolute;
+   bottom: 0;
+   border-top: 1px solid #eee;
+}
+
+#loginAfter #alarmBox a {
+   width: 100px;
+   padding: 10px 0;
+   text-align: center;
+   text-decoration: none;
+   color: #333;
+   display: block;
+   float: left;
+}
+/*헤더 끝*/
+
+
+/*
+페이징 CSS
+*/
+.paginate {
+	font-size:14px;
+	text-align:center;
+	height:34px;
+	line-height:34px;
+	font-weight:500;
+	margin: 5px;
+}
+
+.paginate a, 
+.paginate span,
+.paginate strong{
+	color:#858585;
+	text-decoration:none;
+	padding:6px 12px;
+	border:1px solid transparent;
+	transition:1s ease;
+}
+
+.paginate span {
+	border-color:#E1E1E1;
+	cursor: not-allowed;
+	color:#ededed;
+}
+
+.paginate a:hover {
+	background:#463a84;
+	border-color:#E1E1E1;
+	font-weight:900;
+	color:#fff;
+	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.paginate strong {
+	background:#251F39;
+	border-color:#251F39;
+	color:#fff;
+	cursor: not-allowed;
+	font-weight:900;
+}
+
+/*
+비활성화
+*/
+.paginate span.next,
+.paginate span.prev {
+	border-color:#E1E1E1;
+	color:#E1E1E1;
+	cursor:default;
+	cursor:not-allowed;
+} 

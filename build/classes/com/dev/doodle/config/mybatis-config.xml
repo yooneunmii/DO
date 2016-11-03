@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC  "-//mybatis.org/DTD Config 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!-- VO의 별칭 -->
+<typeAliases>
+	<typeAlias alias="User" type="com.dev.doodle.vo.User"/>
+	<typeAlias alias="Board" type="com.dev.doodle.vo.Board"/>
+	<typeAlias alias="Burger" type="com.dev.doodle.vo.Burger"/>
+	<typeAlias alias="Category" type="com.dev.doodle.vo.Category"/>
+	<typeAlias alias="FanArt" type="com.dev.doodle.vo.FanArt"/>
+	<typeAlias alias="Favor" type="com.dev.doodle.vo.Favor"/>
+	<typeAlias alias="Genre" type="com.dev.doodle.vo.Genre"/>
+	<typeAlias alias="Guestbook" type="com.dev.doodle.vo.Guestbook"/>
+	<typeAlias alias="Neighbor" type="com.dev.doodle.vo.Neighbor"/>
+	<typeAlias alias="Old" type="com.dev.doodle.vo.Old"/>
+	<typeAlias alias="OldContent" type="com.dev.doodle.vo.OldContent"/>
+	<typeAlias alias="Paragraph" type="com.dev.doodle.vo.Paragraph"/>
+	<typeAlias alias="Patty" type="com.dev.doodle.vo.Patty"/>
+	<typeAlias alias="Reply" type="com.dev.doodle.vo.Reply"/>
+	<typeAlias alias="Bookmark" type="com.dev.doodle.vo.Bookmark"/>
+	<typeAlias alias="PagingVO" type="com.dev.doodle.vo.PagingVO"/>
+</typeAliases>
+
+	<!--  XML 주석 -->
+	<!--  DB연결환경 설정 -->
+	<environments default="development">
+	
+		<environment id="development">
+			<!-- JDBC를 사용하니까 -->
+			<transactionManager type="JDBC"/>
+			<!-- 커넥션풀 설정(DB와 연결설정) -->		
+			<dataSource type="JNDI">
+				<!-- WebContent/META-INF/context.xml의 name과 value값이 같아야 한다. -->
+				<property name="data_source" value="java:comp/env/oraclexe"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- 맵퍼경로 설정 -->
+	<mappers>
+		<mapper resource="com/dev/doodle/mapper/users.xml"/>
+		<mapper resource="com/dev/doodle/mapper/board.xml"/>
+		<mapper resource="com/dev/doodle/mapper/burgers.xml"/>
+		<mapper resource="com/dev/doodle/mapper/category.xml"/>
+		<mapper resource="com/dev/doodle/mapper/fanArt.xml"/>
+		<mapper resource="com/dev/doodle/mapper/favor.xml"/>
+		<mapper resource="com/dev/doodle/mapper/genre.xml"/>
+		<mapper resource="com/dev/doodle/mapper/guestbook.xml"/>
+		<mapper resource="com/dev/doodle/mapper/neighbor.xml"/>
+		<mapper resource="com/dev/doodle/mapper/old.xml"/>
+		<mapper resource="com/dev/doodle/mapper/oldContent.xml"/>
+		<mapper resource="com/dev/doodle/mapper/paragraph.xml"/>
+		<mapper resource="com/dev/doodle/mapper/patty.xml"/>
+		<mapper resource="com/dev/doodle/mapper/reply.xml"/>
+		<mapper resource="com/dev/doodle/mapper/bookmark.xml"/>
+	</mappers>
+
+</configuration>
+
+
+
+
+
+

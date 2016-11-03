@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+
+	<!-- 홍수형 -->
+	<select id="selectMyWritten" parameterType="int" resultType="Board">
+		SELECT no, user_no userNo, title, time, content, genre, regdate, hit,
+		parent_line parentLine, parents, profile
+		FROM board
+		WHERE user_no =
+		#{userNo}
+	</select>
+
+	<select id="selectSearch" parameterType="String" resultType="Board">
+		SELECT no, user_no userNo, title, time, content, genre, regdate, hit,
+		parent_line parentLine, parents, profile
+		FROM board
+		WHERE title LIKE '%'
+		|| #{keyword} || '%'
+		OR content LIKE '%' ||
+		#{keyword} || '%'
+	</select>
+
+	<select id="selectGenre" parameterType="String" resultType="Board">
+		SELECT b.no, b.title, b.time, b.hit, b.profile, b.genre, p.content
+		,p.regdate
+		FROM board b, paragraph p
+		WHERE b.no = p.board_no
+		AND
+		p.last_line = 'T'
+		AND b.genre = #{genre}
+	</select>
+
+	<select id="selectAllGenre" resultType="Board">
+		SELECT b.no, b.title,
+		b.time, b.hit, b.profile, b.genre, p.content ,p.regdate
+		FROM board b,
+		paragraph p
+		WHERE b.no = p.board_no
+		AND p.last_line = 'T'
+	</select>
+
+	<select id="selectGenreBest" parameterType="String" resultType="Board">
+		SELECT b.no, b.title, b.time, b.hit, b.profile, b.genre, p.content
+		,p.regdate
+		FROM board b, paragraph p
+		WHERE b.no = p.board_no
+		AND b.genre
+		= #{genre}
+		AND p.last_line = 'T'
+		ORDER BY b.hit DESC, p.regdate ASC
+	</select>
+
+	<select id="selectGenreRegdate" parameterType="String"
+		resultType="Board">
+		SELECT b.no, b.title, b.time, b.hit, b.profile, b.genre,
+		p.content ,p.regdate
+		FROM board b, paragraph p
+		WHERE b.no = p.board_no
+		AND b.genre = #{genre}
+		AND p.last_line = 'T'
+		ORDER BY p.regdate ASC
+	</select>
+
+	<select id="selectGenreHit" parameterType="String" resultType="Board">
+		SELECT b.no, b.title, b.time, b.hit, b.profile, b.genre, p.content
+		,p.regdate
+		FROM board b, paragraph p
+		WHERE b.no = p.board_no
+		AND b.genre
+		= #{genre}
+		AND p.last_line = 'T'
+		ORDER BY b.hit DESC
+	</select>
+	<!-- 은미 -->
+
+	<select id="selectOne" parameterType="int" resultType="Board">
+		select
+		no,user_no userNo,title,time,content,genre,regdate,hit,parent_line
+		parentLine,parents,profile
+		from board
+		where no=#{no}
+	</select>
+
+	<select id="selectBungi" parameterType="Board" resultType="Board">
+		select no,user_no
+		userNo,title,time,content,genre,regdate,hit,parent_line
+		parentLine,parents,profile
+		from board
+		where parent_line=#{parentLine}
+		and parents=#{parents}
+	</select>
+
+<insert id="insert" parameterType="Board">
+insert into board(no,user_no,title,time,content,genre,regdate,hit,parent_line,parents,profile)
+values(board_seq.nextval,#{userNo},#{title},#{time},#{content},#{genre},systimestamp,#{hit},#{parentLine},#{parents},#{profile})
+</insert>
+
+<select id="boardNo" parameterType="Board" resultType="int">
+select no
+from board
+where title=#{title}and content=#{content} and user_no=#{userNo}
+</select>
+
+</mapper>

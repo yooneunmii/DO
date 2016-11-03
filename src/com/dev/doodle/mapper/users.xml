@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="users">
+
+	<select id="selectLogin" parameterType="User" resultType="User">
+	SELECT no,id,password,nickname,name,profile,phone,intro
+	FROM users
+	WHERE id = #{id} AND password = #{password}
+	</select>
+
+	<select id="searchId" parameterType="User" resultType="String">
+	SELECT id
+	FROM users
+	WHERE nickname = #{nickname} AND phone = #{phone}
+	</select>
+
+	<select id="searchPwd" parameterType="User" resultType="String">
+	SELECT password
+	FROM users
+	WHERE id = #{id} AND nickname = #{nickname} AND phone = #{phone}
+	</select>
+	
+	<!-- 홍수형 -->
+
+	<update id="update" parameterType="User">
+		UPDATE users
+		SET  profile=#{profile},password=#{password}, name=#{name}, nickname=#{nickname}, phone=#{phone}, intro=#{intro}
+		WHERE no = #{no}
+	</update>
+	
+	<select id="selectSearch" parameterType="String" resultType="User">
+		SELECT no, id, password, nickname, name, profile, phone, intro
+		FROM users
+		WHERE nickname LIKE '%' ||  #{keyword} || '%'
+	</select>
+<!-- 은미 -->
+<select id="selectOne" parameterType="int" resultType="User">
+select no,id,password,nickname,name,profile,phone,intro
+from users
+where no=#{no}
+</select>
+
+<!-- 민지 -->
+
+	<insert id="insert" parameterType="User">
+		INSERT INTO  users(no, id, password, nickname, phone, profile, name)
+		VALUES(users_seq.nextval,#{id},#{password},#{nickname},#{phone},#{profile},#{name})
+	</insert>
+
+	<select id="selectOverlap" resultType="int" parameterType="User">
+		SELECT COUNT(*)
+		FROM USERS
+		WHERE id=#{id}
+	</select>
+
+</mapper>

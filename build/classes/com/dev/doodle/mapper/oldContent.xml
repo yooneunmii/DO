@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="oldContent">
+
+	<select id="selectList" resultType="OldContent">
+		SELECT c.no no, regdate,content,user_no userNo,o.no oldNo,o.name oldName,img,u.name userName,profile,nickname
+		FROM oldcontent c,users u,old o
+		WHERE c.old_no=o.no AND u.no=c.user_no
+		ORDER BY 2
+	</select>
+	
+	<select id="bestSelect" resultType="OldContent">
+		select c.no no,regdate,content,userNo,oldNo,oldName,img,userName,profile,nickname
+		from (	SELECT c.no no, regdate,content,user_no userNo,o.no oldNo,o.name oldName,img,u.name userName,profile,nickname
+				FROM oldcontent c,users u,old o
+				WHERE c.old_no=o.no AND u.no=c.user_no) c
+						,(select no,c
+						  from(select no,c, rownum r
+							   from (select kind_no no,count(*) c
+									 from favor
+									 where category_no = 3 AND result='L'
+									 group by kind_no
+									 ORDER BY 2 DESC
+								)
+				 		  )x
+						  where r=1) f
+		where c.no = f.no
+	</select>
+	
+	<insert id="insertOldContent" parameterType="OldContent">
+		INSERT INTO oldcontent(no,user_no,old_no,content,regdate)
+		VALUES(oldcontent_seq.nextval,#{userNo},#{oldNo},#{content},systimestamp)
+	</insert>
+
+</mapper>

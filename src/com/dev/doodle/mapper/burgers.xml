@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="burgers">
+	<select id="bergerSelect" resultType="Burger">
+	SELECT no,regdate,start_sentence startSentence,end_sentence endSentence,burgerking
+	FROM(	SELECT no,regdate,start_sentence,end_sentence,burgerking,rownum r
+			FROM(SELECT no,regdate,start_sentence,end_sentence,burgerking
+ 				 FROM burgers
+ 				 ORDER BY 2 desc ))
+	WHERE r=1 OR r=2
+	</select>
+</mapper>
