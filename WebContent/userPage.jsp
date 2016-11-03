@@ -407,7 +407,7 @@
                     </div></li>
                 </ul>
                 </div>
-                <h2>"hen7705"님이 새로쓴글</h2>
+                <h2>"emyoon"님이 새로쓴글</h2>
                 <ul id="newCom">
                     <li><i class="fa fa-quote-left"></i>
                         <a href="#">
@@ -450,7 +450,6 @@
                                 </div>
                                 <span class="novcon">너무나 완벽한 내 여자라~</span>
 
-                        
                         </div><!--grust-->
                     </div>
                 </div>
