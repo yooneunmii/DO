@@ -13,6 +13,9 @@ import com.sun.image.codec.jpeg.JPEGEncodeParam;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 public class ResizeImageUtil {
+	/*
+	 * test
+	 */
 	
 	public ResizeImageUtil() {
 		System.out.println("ResizeImageUtil 생성!");
