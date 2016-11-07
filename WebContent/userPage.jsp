@@ -407,7 +407,7 @@
                     </div></li>
                 </ul>
                 </div>
-                <h2>"emyoon1"님이 새로쓴글</h2>//안녕하세요 저는 윤은미 입니다.
+                <h2>"emyoon1"님이 새로쓴글</h2><!--  안녕하세요 저는 윤은미 입니다.*/ bew branch 생성-->
                 <ul id="newCom">
                     <li><i class="fa fa-quote-left"></i>
                         <a href="#">
