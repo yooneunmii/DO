@@ -357,7 +357,7 @@
                     </p>
                 </div>
                 <div id="intro">
-                    <pre>저의 페이지에 와주셔서 정말감사해용 디오부인은미가</pre>
+                    <pre>git branch emyoon</pre>
                     <button id="introBtn">수정</button>
                     <div id="introUpdate">
                     <form>
