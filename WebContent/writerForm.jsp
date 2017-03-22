@@ -308,7 +308,7 @@
 			<input placeholder="제목을 입력해주세요" name="title">
 			<input type="hidden" name="userNo" value="<%=userNo %>"/>
 			<textarea id="text" name="content" placeholder="내용을입력하여주세요"></textarea>
-            <input plaecholder ="미친거니~~"/>
+            <input plaecholder ="바이브- 미친거니!!!!!!!"/>
 			<div id="btn">
 			<button type="reset">취소</button>
 			<button>등록</button>
